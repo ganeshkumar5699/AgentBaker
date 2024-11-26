@@ -48,4 +48,5 @@
         "{\"releases\": $map(($index := releases#$i[version=\"Package: {{packageName}}\"].$i; $map($index, function($i) { $replace(releases[$i + 1].version, /^Version:\\s*/, \"v\") })), function($v) { {\"version\": $v} })}"
       ]
     }
+  }
 }
