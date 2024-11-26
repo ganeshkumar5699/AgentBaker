@@ -24,7 +24,6 @@
       "ignoreUnstable": false
     }
   ],
-
   "customManagers": [
     {
       "customType": "regex",
@@ -34,11 +33,11 @@
       ],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "\"renovateTag\":\\s*\"name=nvidia-container-toolkit, os=azurelinux, release=3\\.0\",\\s*\"latestVersion\":\\s*\"(?<currentValue>[^\"]+)\"(?:[^}]*\"previousLatestVersion\":\\s*\"(?<depType>[^\"]+)\")?"
+        "\"renovateTag\":\\s*\"name=nvidia-container-toolkit, os=azurelinux, release=3\\.0\",\\s*\"latestVersion\":\\s*\"(?<currentValue>[^\"]+)\""
       ],
       "datasourceTemplate": "custom.azurelinux",
-      "versioningTemplate": "deb",
-      "autoReplaceStringTemplate": "\"renovateTag\": \"name=nvidia-container-toolkit, os=azurelinux, release=3.0\",\n                \"latestVersion\": \"{{{newValue}}}\"{{#if depType}},\n                \"previousLatestVersion\": \"{{{currentValue}}}\"{{/if}}"
+      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>\\d{14})$",
+      "autoReplaceStringTemplate": "\"renovateTag\": \"name=nvidia-container-toolkit, os=azurelinux, release=3.0\",\n          \"latestVersion\": \"{{{newValue}}}\""
     }
   ],
   "customDatasources": {
@@ -46,8 +45,7 @@
       "defaultRegistryUrlTemplate": "https://packages.microsoft.com/azurelinux/3.0/prod/base/x86_64/Packages/n/",
       "format": "plain",
       "transformTemplates": [
-        "{\"releases\": $map(($index := releases#$i[version=\"Package: nvidia-container-toolkit\"].$i; $map($index, function($i) { $replace(releases[$i + 1].version, /^Version:\\s*/, \"\") })), function($v) { {\"version\": $v} })}"
+        "{\"releases\": $map(($index := releases#$i[version=\"Package: {{packageName}}\"].$i; $map($index, function($i) { $replace(releases[$i + 1].version, /^Version:\\s*/, \"v\") })), function($v) { {\"version\": $v} })}"
       ]
     }
-  }
 }
