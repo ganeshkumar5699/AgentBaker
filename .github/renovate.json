@@ -33,11 +33,11 @@
       ],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "\"renovateTag\":\\s*\"name=nvidia-container-toolkit, os=azurelinux, release=3\\.0\",\\s*\"latestVersion\":\\s*\"(?<currentValue>[^\"]+)\""
+        "\"renovateTag\":\\s*\"name=(?<packageName>nvidia-container-toolkit), os=azurelinux, release=3\\.0\",\\s*\"latestVersion\":\\s*\"(?<currentValue>[^\"]+)\""
       ],
       "datasourceTemplate": "custom.azurelinux",
       "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>\\d{14})$",
-      "autoReplaceStringTemplate": "\"renovateTag\": \"name=nvidia-container-toolkit, os=azurelinux, release=3.0\",\n          \"latestVersion\": \"{{{newValue}}}\""
+      "autoReplaceStringTemplate": "\"renovateTag\": \"name={{{packageName}}}, os=azurelinux, release=3.0\",\n          \"latestVersion\": \"{{{newValue}}}\""
     }
   ],
   "customDatasources": {
