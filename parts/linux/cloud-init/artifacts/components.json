@@ -880,6 +880,23 @@
           }
         }
       }
+    },
+    {
+      "name": "nvidia-container-toolkit",
+      "downloadLocation": "/usr/local/bin",
+      "downloadURIs": {
+        "azurelinux": {
+          "current": {
+            "versionsV2": [
+              {
+                "renovateTag": "name=nvidia-container-toolkit, os=azurelinux, release=3.0",
+                "latestVersion": "1.16.2"
+              }
+            ],
+            "downloadURL": ""
+          }
+        }
+      }
     }
   ]
 }
