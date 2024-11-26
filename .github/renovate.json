@@ -66,18 +66,17 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Auto-update nvidia-container-toolkit for Azure Linux in components.json",
+      "description": "auto update nvidia-container-toolkit for Azure Linux in components.json",
       "fileMatch": [
-        "components.json"
+        "parts/linux/cloud-init/artifacts/components.json"
       ],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "\"renovateTag\":\\s*\"name=nvidia-container-toolkit, os=azurelinux, release=3\\.0\",\\s*\"latestVersion\":\\s*\"(?<currentValue>[^\"]+)\""
+        "\"renovateTag\":\\s*\"name=nvidia-container-toolkit, os=azurelinux, release=3\\.0\",\\s*\"latestVersion\":\\s*\"(?<currentValue>[^\"]+)\"(?:[^}]*\"previousLatestVersion\":\\s*\"(?<depType>[^\"]+)\")?"
       ],
-      "datasourceTemplate": "custom.nvidiaToolkitAzureLinux",
-      "packageNameTemplate": "nvidia-container-toolkit",
-      "versioningTemplate": "semver",
-      "autoReplaceStringTemplate": "\"renovateTag\": \"name=nvidia-container-toolkit, os=azurelinux, release=3.0\",\n                \"latestVersion\": \"{{{newValue}}}\""
+      "datasourceTemplate": "custom.azurelinux",
+      "versioningTemplate": "deb",
+      "autoReplaceStringTemplate": "\"renovateTag\": \"name=nvidia-container-toolkit, os=azurelinux, release=3.0\",\n                \"latestVersion\": \"{{{newValue}}}\"{{#if depType}},\n                \"previousLatestVersion\": \"{{{currentValue}}}\"{{/if}}"
     }
   ],
   "customDatasources": {
