@@ -81,13 +81,11 @@
     }
   ],
   "customDatasources": {
-    "nvidiaToolkitAzureLinux": {
+    "azurelinux": {
       "defaultRegistryUrlTemplate": "https://packages.microsoft.com/azurelinux/3.0/prod/base/x86_64/Packages/n/",
       "format": "plain",
-      "packagePattern": "^nvidia-container-toolkit-(?<version>\\d+(\\.\\d+)+)-\\d+\\.azl3\\.x86_64\\.rpm$",
-      "versioning": "semver",
       "transformTemplates": [
-        "{\"releases\": $map(matches, function($v) { {\"version\": $v.version} }) }"
+        "{\"releases\": $map(($index := releases#$i[version=\"Package: nvidia-container-toolkit\"].$i; $map($index, function($i) { $replace(releases[$i + 1].version, /^Version:\\s*/, \"\") })), function($v) { {\"version\": $v} })}"
       ]
     }
   }
