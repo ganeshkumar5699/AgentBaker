@@ -62,19 +62,22 @@
       "ignoreUnstable": false
     }
   ],
+
   "customManagers": [
     {
       "customType": "regex",
-      "description": "auto update containerImages in components.json",
+      "description": "Auto-update nvidia-container-toolkit for Azure Linux in components.json",
       "fileMatch": [
-        "parts/linux/cloud-init/artifacts/components.json"
+        "components.json"
       ],
       "matchStringsStrategy": "any",
       "matchStrings": [
-        "\"renovateTag\":\\s*\"registry=(?<registryUrl>[^,]+), name=(?<packageName>[^\"]+)\",\\s*\"latestVersion\":\\s*\"(?<currentValue>[^\"]+)\"(?:[^}]*\"previousLatestVersion\":\\s*\"(?<depType>[^\"]+)\")?"
+        "\"renovateTag\":\\s*\"name=nvidia-container-toolkit, os=azurelinux, release=3\\.0\",\\s*\"latestVersion\":\\s*\"(?<currentValue>[^\"]+)\""
       ],
-      "datasourceTemplate": "docker",
-      "autoReplaceStringTemplate": "\"renovateTag\": \"registry={{{registryUrl}}}, name={{{packageName}}}\",\n          \"latestVersion\": \"{{{newValue}}}\"{{#if depType}},\n          \"previousLatestVersion\": \"{{{currentValue}}}\"{{/if}}"
+      "datasourceTemplate": "custom.nvidiaToolkitAzureLinux",
+      "packageNameTemplate": "nvidia-container-toolkit",
+      "versioningTemplate": "semver",
+      "autoReplaceStringTemplate": "\"renovateTag\": \"name=nvidia-container-toolkit, os=azurelinux, release=3.0\",\n                \"latestVersion\": \"{{{newValue}}}\""
     }
   ],
   "customDatasources": {
