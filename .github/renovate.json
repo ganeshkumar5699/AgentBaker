@@ -16,44 +16,6 @@
     }
   ],
   "packageRules": [
-    {
-      "matchDatasources": ["docker", "custom.deb1804", "custom.deb2004", "custom.deb2204", "custom.deb2404"],
-      "matchUpdateTypes": [
-        "minor"
-      ],
-      "automerge": false,
-      "enabled": false
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": [
-        "patch"
-      ],
-      "automerge": false,
-      "enabled": true
-    },
-    {
-      "matchDatasources": ["custom.deb1804"],
-      "matchUpdateTypes": [
-        "patch"
-      ],
-      "additionalBranchPrefix": "deb1804-",
-      "automerge": false,
-      "enabled": true
-    },
-    {
-      "matchDatasources": ["custom.deb2004"],
-      "matchUpdateTypes": [
-        "patch"
-      ],
-      "additionalBranchPrefix": "deb2004-",
-      "automerge": false,
-      "enabled": true
-    },
-    {
-      "matchPackageNames": ["moby-runc", "moby-containerd"],
-      "assignees": ["devinwong", "anujmaheshwari1", "cameronmeissner", "AlisonB319", "lilypan26", "djsly", "jason1028kr", "UtheMan", "zachary-bailey", "ganeshkumarashok"]
-    },
     {      
       "matchPackageNames": ["aks/aks-gpu-cuda", "aks/aks-gpu-grid"],      
       "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<prerelease>\\d{14})$",
