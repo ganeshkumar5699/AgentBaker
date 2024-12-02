@@ -890,7 +890,7 @@
             "versionsV2": [
               {
                 "renovateTag": "name=nvidia-container-toolkit, os=azurelinux, release=3.0",
-                "latestVersion": "1.16.2"
+                "latestVersion": "1.15.0"
               }
             ],
             "downloadURL": ""
